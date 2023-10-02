@@ -1,0 +1,12 @@
+.formSuppliers {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 1vh;
+}
+.buttonSupplier {
+  border-bottom-right-radius: 1vh;
+  border-bottom-left-radius: 1vh;
+  background-color: aqua;
+}

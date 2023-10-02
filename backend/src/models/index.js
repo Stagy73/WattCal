@@ -30,9 +30,35 @@ pool.getConnection().catch(() => {
 const models = {};
 
 const ItemManager = require("./ItemManager");
+const DeviceManager = require("./DeviceManager");
+const CatManager = require("./CatManager");
+const UserManager = require("./UserManager");
+const SupplierManager = require("./SupplierManager");
+const CurrencyManager = require("./CurrencyManager");
 
+// model-item-example
 models.item = new ItemManager();
 models.item.setDatabase(pool);
+
+// model-currency
+models.currency = new CurrencyManager();
+models.currency.setDatabase(pool);
+
+// model-supplier
+models.supplier = new SupplierManager();
+models.supplier.setDatabase(pool);
+
+// model-devices
+models.device = new DeviceManager();
+models.device.setDatabase(pool);
+
+// model-cat
+models.cat = new CatManager();
+models.cat.setDatabase(pool);
+
+// model-users
+models.user = new UserManager();
+models.user.setDatabase(pool);
 
 // bonus: use a proxy to personalize error message,
 // when asking for a non existing model

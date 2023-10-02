@@ -17,8 +17,12 @@ const cors = require("cors");
 
 app.use(
   cors({
-    origin: process.env.FRONTEND_URL ?? "http://localhost:3000",
-    optionsSuccessStatus: 200,
+    origin: [
+      "http://127.0.0.1:3000",
+      process.env.FRONTEND_URL ?? "http://127.0.0.1:3000",
+    ],
+    methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+    credentials: false, // Enable credentials (if needed)
   })
 );
 
