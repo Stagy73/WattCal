@@ -3,7 +3,7 @@ const express = require("express");
 const router = express.Router();
 
 const itemControllers = require("./controllers/itemControllers");
-const deviceControllers = require("./controllers/DeviceController");
+const deviceController = require("./controllers/DeviceController");
 const catControllers = require("./controllers/CatController");
 const userControllers = require("./controllers/UserController");
 const supplierControllers = require("./controllers/SupplierController");
@@ -16,12 +16,12 @@ router.put("/items/:id", itemControllers.edit);
 router.post("/items", itemControllers.add);
 router.delete("/items/:id", itemControllers.destroy);
 // devices
-router.get("/devices", deviceControllers.browse);
-router.get("/devices/:id", deviceControllers.read);
-router.get("/devices/:ean", deviceControllers.readEan);
-router.put("/devices/:id", deviceControllers.edit);
-router.post("/devices", deviceControllers.add);
-router.delete("/devices/:id", deviceControllers.destroy);
+router.get("/devices", deviceController.browse);
+router.get("/devices/:id", deviceController.read);
+router.get("/devices/:ean", deviceController.readean);
+router.put("/devices/:id", deviceController.edit);
+router.post("/devices", deviceController.add);
+router.delete("/devices/:id", deviceController.destroy);
 // categories
 router.get("/cats", catControllers.browse);
 router.get("/cats/:id", catControllers.read);

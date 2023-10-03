@@ -27,13 +27,20 @@ const read = (req, res) => {
       res.sendStatus(500);
     });
 };
-const readEan = (req, res) => {
+
+const readean = (req, res) => {
+  console.warn("Request response", res);
+  console.warn("Request question", req);
+  console.warn("Request received with EAN!!!:", req.params.ean);
+
   models.device
-    .findEan(req.params.ean)
+    .find(req.params.ean)
     .then(([rows]) => {
       if (rows[0] == null) {
+        console.warn("Device not found!!!!.");
         res.sendStatus(404);
       } else {
+        console.warn("Device found:", rows[0]);
         res.send(rows[0]);
       }
     })
@@ -100,7 +107,7 @@ const destroy = (req, res) => {
 module.exports = {
   browse,
   read,
-  readEan,
+  readean,
   edit,
   add,
   destroy,

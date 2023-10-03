@@ -14,7 +14,7 @@ function DeviceSearch() {
         const response = await fetch(
           `${
             import.meta.env.VITE_BACKEND_URL ?? "http://127.0.0.1:6001"
-          }/devices/ean/${ean}`
+          }/devices/${ean}`
         );
 
         if (response.status === 200) {

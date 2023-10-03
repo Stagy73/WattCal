@@ -12,8 +12,8 @@ class DeviceManager extends AbstractManager {
     );
   }
 
-  findEan(ean) {
-    return this.database.query(`select * from  ${this.table} where ean = ?`, [
+  find(ean) {
+    return this.database.query(`SELECT * FROM ${this.table} WHERE ean = ?`, [
       ean,
     ]);
   }
