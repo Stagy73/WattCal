@@ -5,16 +5,45 @@ class DeviceManager extends AbstractManager {
     super({ table: "device" });
   }
 
-  insert(device) {
-    return this.database.query(
-      `insert into ${this.table} (title,brand,watt,category,ean) values (?,?,?,?,?)`,
-      [device.title, device.brand, device.watt, device.category, device.ean]
-    );
+  async insert(device) {
+    try {
+      const result = await this.database.query(
+        `INSERT INTO ${this.table} (title, brand, watt, ean, category_name, supplier, price, price_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?)`,
+        [
+          device.title,
+          device.brand,
+          device.watt,
+          device.ean,
+          device.category,
+          device.supplier,
+          device.price,
+          device.price_id,
+        ]
+      );
+
+      // Assuming your query library returns a result object with an `insertId` property
+      const insertId = result.insertId;
+
+      // Fetch the inserted device using the insertId
+      const insertedDevice = await this.find(insertId);
+
+      return insertedDevice;
+    } catch (error) {
+      // Handle the error (log it, return an error response, etc.)
+      console.error("Error inserting device:", error);
+      throw error;
+    }
   }
 
   find(ean) {
     return this.database.query(`SELECT * FROM ${this.table} WHERE ean = ?`, [
       ean,
+    ]);
+  }
+
+  findByBrand(brand) {
+    return this.database.query(`SELECT * FROM ${this.table} WHERE brand = ?`, [
+      brand,
     ]);
   }
 

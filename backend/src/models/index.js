@@ -35,10 +35,15 @@ const CatManager = require("./CatManager");
 const UserManager = require("./UserManager");
 const SupplierManager = require("./SupplierManager");
 const CurrencyManager = require("./CurrencyManager");
+const PriceManager = require("./PriceManager");
 
 // model-item-example
 models.item = new ItemManager();
 models.item.setDatabase(pool);
+
+// model-price
+models.price = new PriceManager();
+models.price.setDatabase(pool);
 
 // model-currency
 models.currency = new CurrencyManager();

@@ -1,7 +1,7 @@
 const models = require("../models");
 
 const browse = (req, res) => {
-  models.device
+  models.price
     .findAll()
     .then(([rows]) => {
       res.send(rows);
@@ -13,7 +13,7 @@ const browse = (req, res) => {
 };
 
 const read = (req, res) => {
-  models.device
+  models.price
     .find(req.params.id)
     .then(([rows]) => {
       if (rows[0] == null) {
@@ -28,56 +28,15 @@ const read = (req, res) => {
     });
 };
 
-// controller search by brand
-const searchByBrand = (req, res) => {
-  models.device
-    .findByBrand(req.params.brand) // Implement a method like findByBrand in your model
-    .then((devices) => {
-      if (devices.length === 0) {
-        res.sendStatus(404);
-      } else {
-        res.send(devices);
-      }
-    })
-    .catch((err) => {
-      console.error(err);
-      res.sendStatus(500);
-    });
-};
-
-// controller serach by ean
-
-const readean = (req, res) => {
-  console.warn("Request response", res);
-  console.warn("Request question", req);
-  console.warn("Request received with EAN!!!:", req.params.ean);
-
-  models.device
-    .find(req.params.ean)
-    .then(([rows]) => {
-      if (rows[0] == null) {
-        console.warn("Device not found!!!!.");
-        res.sendStatus(404);
-      } else {
-        console.warn("Device found:", rows[0]);
-        res.send(rows[0]);
-      }
-    })
-    .catch((err) => {
-      console.error(err);
-      res.sendStatus(500);
-    });
-};
-
 const edit = (req, res) => {
-  const device = req.body;
+  const price = req.body;
 
   // TODO validations (length, format...)
 
-  device.id = parseInt(req.params.id, 10);
+  price.id = parseInt(req.params.id, 10);
 
-  models.device
-    .update(device)
+  models.price
+    .update(price)
     .then(([result]) => {
       if (result.affectedRows === 0) {
         res.sendStatus(404);
@@ -92,14 +51,14 @@ const edit = (req, res) => {
 };
 
 const add = (req, res) => {
-  const device = req.body;
+  const price = req.body;
 
   // TODO validations (length, format...)
 
-  models.device
-    .insert(device)
+  models.price
+    .insert(price)
     .then(([result]) => {
-      res.location(`/devices/${result.insertId}`).sendStatus(201);
+      res.location(`/prices/${result.insertId}`).sendStatus(201);
     })
     .catch((err) => {
       console.error(err);
@@ -108,7 +67,7 @@ const add = (req, res) => {
 };
 
 const destroy = (req, res) => {
-  models.device
+  models.price
     .delete(req.params.id)
     .then(([result]) => {
       if (result.affectedRows === 0) {
@@ -126,9 +85,7 @@ const destroy = (req, res) => {
 module.exports = {
   browse,
   read,
-  readean,
   edit,
   add,
   destroy,
-  searchByBrand,
 };

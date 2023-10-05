@@ -7,21 +7,15 @@ class SupplierManager extends AbstractManager {
 
   insert(supplier) {
     return this.database.query(
-      `INSERT INTO ${this.table} (title, country, price, year) VALUES (?, ?, ?, ?)`,
-      [supplier.title, supplier.country, supplier.price, supplier.year]
+      `INSERT INTO ${this.table} (title, country, year) VALUES (?, ?, ?)`,
+      [supplier.title, supplier.country, supplier.year]
     );
   }
 
   update(supplier) {
     return this.database.query(
-      `UPDATE ${this.table} SET title = ?, country = ?, price = ?, year = ? WHERE id = ?`,
-      [
-        supplier.title,
-        supplier.country,
-        supplier.price,
-        supplier.year,
-        supplier.id,
-      ]
+      `UPDATE ${this.table} SET title = ?, country = ? year = ? WHERE id = ?`,
+      [supplier.title, supplier.country, supplier.year, supplier.id]
     );
   }
 }

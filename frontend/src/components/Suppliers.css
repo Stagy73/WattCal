@@ -10,3 +10,7 @@
   border-bottom-left-radius: 1vh;
   background-color: aqua;
 }
+.supplierCreation {
+  border: 1px solid #000;
+  margin: 3vh;
+}

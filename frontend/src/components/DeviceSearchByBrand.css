@@ -1,0 +1,33 @@
+.liSearchByBrand {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  border: 1px;
+  gap: 1vh;
+}
+.buttonSearchByBrand {
+  border-bottom-right-radius: 1vh;
+  border-bottom-left-radius: 1vh;
+  background-color: aqua;
+  margin-left: 1vh;
+}
+
+.formSearchByBrand {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  border: 1px;
+  gap: 1vh;
+}
+.ulDeviceSearchByBrand {
+  list-style-type: none;
+}
+.searchEanAndbrand {
+  border: 1px solid #000;
+  margin: 3vh;
+}
+.resultSearchBrand {
+  font: bold !important;
+}

@@ -8,6 +8,7 @@ const catControllers = require("./controllers/CatController");
 const userControllers = require("./controllers/UserController");
 const supplierControllers = require("./controllers/SupplierController");
 const currencyControllers = require("./controllers/CurrencyController");
+const priceControllers = require("./controllers/PriceController");
 
 // examples
 router.get("/items", itemControllers.browse);
@@ -19,6 +20,8 @@ router.delete("/items/:id", itemControllers.destroy);
 router.get("/devices", deviceController.browse);
 router.get("/devices/:id", deviceController.read);
 router.get("/devices/:ean", deviceController.readean);
+router.get("/devices/brand/:brand", deviceController.searchByBrand);
+
 router.put("/devices/:id", deviceController.edit);
 router.post("/devices", deviceController.add);
 router.delete("/devices/:id", deviceController.destroy);
@@ -48,5 +51,13 @@ router.get("/currencies/:id", currencyControllers.read);
 router.put("/currencies/:id", currencyControllers.edit);
 router.post("/currencies", currencyControllers.add);
 router.delete("/currencies/:id", currencyControllers.destroy);
+
+// price
+
+router.get("/prices", priceControllers.browse);
+router.get("/prices/:id", priceControllers.read);
+router.put("/prices/:id", priceControllers.edit);
+router.post("/prices", priceControllers.add);
+router.delete("/prices/:id", priceControllers.destroy);
 
 module.exports = router;

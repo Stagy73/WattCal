@@ -19,7 +19,6 @@ function Suppliers() {
     if (
       titleRef.current.value === "" ||
       countryRef.current.value === "" ||
-      priceRef.current.value === "" ||
       yearRef.current.value === ""
     ) {
       return;
@@ -27,13 +26,13 @@ function Suppliers() {
 
     const title = titleRef.current.value;
     const country = countryRef.current.value;
-    const price = priceRef.current.value;
+
     const year = yearRef.current.value;
 
     formRef.current.reset();
     titleRef.current.value = "";
     countryRef.current.value = "";
-    priceRef.current.value = "";
+
     yearRef.current.value = "";
 
     try {
@@ -49,7 +48,7 @@ function Suppliers() {
           body: JSON.stringify({
             title,
             country,
-            price,
+
             year,
           }),
         }
@@ -105,22 +104,11 @@ function Suppliers() {
                 required
               />
             </label>
+
             <label>
               <input
                 className="form-container-info"
-                type="text"
-                name="price"
-                ref={priceRef}
-                placeholder="Price *"
-                required
-                pattern="^\d+(\.\d{1,2})?$"
-                title="Enter a valid decimal number (e.g., 12.34)"
-              />
-            </label>
-            <label>
-              <input
-                className="form-container-info"
-                type="text"
+                type="Date"
                 name="year"
                 ref={yearRef}
                 placeholder="Year * (yyyy-mm-dd)"

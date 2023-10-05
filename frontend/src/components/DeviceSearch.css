@@ -1,0 +1,20 @@
+.eanSearchForm {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.searchEanAndbrand {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  gap: 8vh;
+}
+.ulDeviceSearchByEan {
+  list-style-type: none;
+}
+.liDeviceSearchByEan {
+  list-style-type: none;
+}

@@ -9,4 +9,9 @@
   justify-content: center;
   align-items: center;
   gap: 1vh;
+  margin-bottom: 5vh;
+}
+.electricComponentCreation {
+  border: 1px solid #000;
+  margin: 3vh;
 }
