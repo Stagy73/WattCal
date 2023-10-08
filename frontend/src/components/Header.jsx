@@ -1,6 +1,5 @@
 import React from "react";
-
-import { Link } from "react-router-dom"; // Import Link from react-router-dom for navigation
+import { Link } from "react-router-dom";
 import "./Header.css";
 
 function Header() {
@@ -19,8 +18,8 @@ function Header() {
             </Link>
           </li>
           <li className="liNav">
-            <Link className="aNav" to="/logout">
-              Logout
+            <Link className="aNav" to="/register">
+              Register
             </Link>
           </li>
         </ul>

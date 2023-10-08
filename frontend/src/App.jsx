@@ -1,21 +1,36 @@
+import React from "react";
 import { ToastContainer } from "react-toastify";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Suppliers from "./components/Suppliers";
 import Header from "./components/Header";
-
+import Login from "./components/Login";
+import Register from "./components/Register";
 import "react-toastify/dist/ReactToastify.css";
-
 import "./App.css";
 import Device from "./components/Device";
 import DeviceSearch from "./components/DeviceSearch";
 
-function App() {
+function Home() {
+  // Render all three components here
   return (
-    <div className="App">
-      <Header />
-      <ToastContainer />
+    <>
       <Suppliers />
       <Device />
       <DeviceSearch />
+    </>
+  );
+}
+
+function App() {
+  return (
+    <div className="App">
+      <ToastContainer />
+      <Header />
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
+      </Routes>
     </div>
   );
 }

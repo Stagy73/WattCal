@@ -25,6 +25,7 @@ app.use(
     credentials: false, // Enable credentials (if needed)
   })
 );
+// server.js or app.js
 
 // import and mount the API routes
 

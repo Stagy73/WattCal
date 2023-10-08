@@ -10,6 +10,13 @@ const supplierControllers = require("./controllers/SupplierController");
 const currencyControllers = require("./controllers/CurrencyController");
 const priceControllers = require("./controllers/PriceController");
 
+// middleware
+const { CheckUserMiddleware } = require("./middlewares/CheckUserMiddleware");
+
+const { CheckDoubleEmail } = require("./middlewares/CheckDoubleEmail");
+
+const { hashPassword } = require("./middlewares/Hash");
+
 // examples
 router.get("/items", itemControllers.browse);
 router.get("/items/:id", itemControllers.read);
@@ -35,7 +42,13 @@ router.delete("/cats/:id", catControllers.destroy);
 router.get("/users", userControllers.browse);
 router.get("/users/:id", userControllers.read);
 router.put("/users/:id", userControllers.edit);
-router.post("/users", userControllers.add);
+router.post(
+  "/users",
+  CheckUserMiddleware,
+  CheckDoubleEmail,
+  hashPassword,
+  userControllers.add
+);
 router.delete("/users/:id", userControllers.destroy);
 
 // supplier
