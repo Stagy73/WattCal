@@ -27,6 +27,10 @@ app.use(
 );
 // server.js or app.js
 
+const cookieParser = require("cookie-parser");
+
+app.use(cookieParser());
+
 // import and mount the API routes
 
 const router = require("./router");

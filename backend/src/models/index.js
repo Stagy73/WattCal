@@ -65,11 +65,6 @@ models.cat.setDatabase(pool);
 models.user = new UserManager();
 models.user.setDatabase(pool);
 
-const userManager = new UserManager();
-userManager.setDatabase(pool); // Set the database connection for UserManager
-
-models.user = userManager;
-
 // bonus: use a proxy to personalize error message,
 // when asking for a non existing model
 
