@@ -6,8 +6,14 @@ class UserManager extends AbstractManager {
     this.database = database;
   }
 
-  findByEmail(email) {
+  /*  findByEmail(email) {
     return this.database.query(`SELECT * FROM ${this.table} WHERE email = ?`, [
+      email,
+    ]);
+  } */
+
+  findByUsernameWithPassword(email) {
+    return this.database.query(`select * from  ${this.table} where email = ?`, [
       email,
     ]);
   }

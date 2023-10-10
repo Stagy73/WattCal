@@ -13,23 +13,19 @@ const app = express();
 
 app.use(express.json());
 
+const cookieParser = require("cookie-parser");
+
+app.use(cookieParser());
+
 const cors = require("cors");
 
 app.use(
   cors({
-    origin: [
-      "http://127.0.0.1:3000",
-      process.env.FRONTEND_URL ?? "http://127.0.0.1:3000",
-    ],
-    methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
-    credentials: false, // Enable credentials (if needed)
+    origin: process.env.FRONTEND_URL ?? "http://localhost:3000",
+    optionsSuccessStatus: 200,
+    credentials: true,
   })
 );
-// server.js or app.js
-
-const cookieParser = require("cookie-parser");
-
-app.use(cookieParser());
 
 // import and mount the API routes
 

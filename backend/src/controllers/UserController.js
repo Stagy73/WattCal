@@ -28,6 +28,31 @@ const read = (req, res) => {
     });
 };
 
+const getUserByUsernameWithPasswordAndPassToNext = (req, res, next) => {
+  const email = req.body.email;
+  models.user
+    .findByUsernameWithPassword(email)
+    .then(([rows]) => {
+      if (rows[0] == null) {
+        res.sendStatus(404);
+      } else {
+        const [foundUser] = rows;
+        // Store the hashed password in req.user
+        req.user = {
+          ...foundUser,
+          hashedpassword: foundUser.hashedpassword,
+        };
+        console.log("founduser", foundUser);
+        console.log("foundUser.hashedpassword", foundUser.hashedpassword);
+        next();
+      }
+    })
+    .catch((err) => {
+      console.error(err);
+      res.sendStatus(500);
+    });
+};
+
 const edit = (req, res) => {
   const user = req.body;
 
@@ -88,4 +113,5 @@ module.exports = {
   edit,
   add,
   destroy,
+  getUserByUsernameWithPasswordAndPassToNext,
 };

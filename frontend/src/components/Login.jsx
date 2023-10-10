@@ -1,27 +1,52 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import "./Login.css"; // You can create a separate CSS file for styling if needed
+import { useRef } from "react";
+import PropTypes from "prop-types";
 
-function Login() {
+function LoginForm({ setUser }) {
+  const emailRef = useRef();
+  const passwordRef = useRef();
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+
+    fetch(
+      `${import.meta.env.VITE_BACKEND_URL ?? "http://localhost:6001"}/login`,
+      {
+        method: "post",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        credentials: "include",
+        body: JSON.stringify({
+          email: emailRef.current.value,
+          password: passwordRef.current.value,
+        }),
+      }
+    )
+      .then((response) => response.json())
+      .then((data) => {
+        console.info("do you see cookie here ?", document.cookie);
+
+        setUser(data.user);
+      });
+  };
+
   return (
-    <div className="login-page">
-      <h2>Login</h2>
-      <form>
-        <div className="form-group">
-          <label htmlFor="email">Email:</label>
-          <input type="email" id="email" name="email" required />
-        </div>
-        <div className="form-group">
-          <label htmlFor="password">Password:</label>
-          <input type="password" id="password" name="password" required />
-        </div>
-        <button type="submit">Login</button>
-      </form>
-      <p>
-        Don't have an account? <Link to="/register">Register</Link>
-      </p>
-    </div>
+    <form onSubmit={handleSubmit}>
+      <div>
+        <label htmlFor="email">email</label>
+        <input type="text" id="email" ref={emailRef} />
+      </div>
+      <div>
+        <label htmlFor="password">password</label>
+        <input type="password" id="password" ref={passwordRef} />
+      </div>
+      <button type="submit">Go</button>
+    </form>
   );
 }
 
-export default Login;
+LoginForm.propTypes = {
+  setUser: PropTypes.func.isRequired,
+};
+
+export default LoginForm;

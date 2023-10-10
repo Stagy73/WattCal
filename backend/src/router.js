@@ -9,13 +9,16 @@ const userControllers = require("./controllers/UserController");
 const supplierControllers = require("./controllers/SupplierController");
 const currencyControllers = require("./controllers/CurrencyController");
 const priceControllers = require("./controllers/PriceController");
+/* const authControllers = require("./controllers/authController"); */
 
 // middleware
 const { CheckUserMiddleware } = require("./middlewares/CheckUserMiddleware");
 
 const { CheckDoubleEmail } = require("./middlewares/CheckDoubleEmail");
 
-const { hashPassword } = require("./middlewares/Hash");
+const { verifyPassword, hashPassword } = require("./middlewares/auth");
+
+/* const { hashPassword } = require("./middlewares/Hash"); */
 
 // examples
 router.get("/items", itemControllers.browse);
@@ -49,6 +52,42 @@ router.post(
   hashPassword,
   userControllers.add
 );
+
+const { sendToken } = require("./middlewares/auth");
+
+router.get("/users", userControllers.browse);
+router.get("/users/:id", userControllers.read);
+router.put("/users/:id", hashPassword, userControllers.edit);
+router.post("/users", hashPassword, userControllers.add);
+router.delete("/users/:id", userControllers.destroy);
+
+router.post(
+  "/login",
+  (req, res, next) => {
+    console.log("Step 1: getUserByUsernameWithPasswordAndPassToNext");
+    userControllers.getUserByUsernameWithPasswordAndPassToNext(req, res, next);
+  },
+  (req, res, next) => {
+    console.log("Step 2: verifyPassword");
+    verifyPassword(req, res, next);
+  },
+  (req, res) => {
+    console.log("Step 3: sendToken");
+    sendToken(req, res);
+  }
+);
+
+router.get("/show-token", (req, res) => {
+  console.info(req.cookies);
+
+  res.sendStatus(200);
+});
+
+router.get("/logout", (req, res) => {
+  res.clearCookie("token");
+
+  res.sendStatus(204);
+});
 router.delete("/users/:id", userControllers.destroy);
 
 // supplier
