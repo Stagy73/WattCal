@@ -43,7 +43,7 @@ const getUserByUsernameWithPasswordAndPassToNext = (req, res, next) => {
           hashedpassword: foundUser.hashedpassword,
         };
         console.log("founduser", foundUser);
-        console.log("foundUser.hashedpassword", foundUser.hashedpassword);
+
         next();
       }
     })

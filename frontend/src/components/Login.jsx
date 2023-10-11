@@ -1,9 +1,11 @@
 import { useRef } from "react";
+import { useNavigate } from "react-router-dom";
 import PropTypes from "prop-types";
 
 function LoginForm({ setUser }) {
   const emailRef = useRef();
   const passwordRef = useRef();
+  const navigate = useNavigate();
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -27,6 +29,11 @@ function LoginForm({ setUser }) {
         console.info("do you see cookie here ?", document.cookie);
 
         setUser(data.user);
+        if (data.user.verified) {
+          console.log(data.user);
+          // Navigate to the "myspace" page
+          navigate("/Myspace");
+        }
       });
   };
 

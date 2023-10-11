@@ -64,15 +64,12 @@ router.delete("/users/:id", userControllers.destroy);
 router.post(
   "/login",
   (req, res, next) => {
-    console.log("Step 1: getUserByUsernameWithPasswordAndPassToNext");
     userControllers.getUserByUsernameWithPasswordAndPassToNext(req, res, next);
   },
   (req, res, next) => {
-    console.log("Step 2: verifyPassword");
     verifyPassword(req, res, next);
   },
   (req, res) => {
-    console.log("Step 3: sendToken");
     sendToken(req, res);
   }
 );

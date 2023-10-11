@@ -1,5 +1,9 @@
 const argon2 = require("argon2");
 const jwt = require("jsonwebtoken");
+require("dotenv").config(); // Load environment variables from .env file
+
+// You can now access the JWT secret key as follows:
+const jwtSecret = process.env.JWT_SECRET;
 
 const hashingOptions = {
   type: argon2.argon2id,
@@ -10,7 +14,7 @@ const hashingOptions = {
 
 const hashPassword = async (req, res, next) => {
   try {
-    req.body.hashedPassword = await argon2.hash(
+    req.body.hashedpassword = await argon2.hash(
       req.body.password,
       hashingOptions
     );
@@ -26,18 +30,10 @@ const hashPassword = async (req, res, next) => {
 
 const verifyPassword = async (req, res, next) => {
   try {
-    if (await argon2.verify(req.user.hashedPassword, req.body.password)) {
-      console.log("req.user", req.user.hashedPassword);
-      console.log("req.user", req.user);
-      console.log("req.user.hashedPassword:", req.user.hashedPassword);
-      console.log("req.body.password:", req.body.password);
-
+    if (await argon2.verify(req.user.hashedpassword, req.body.password)) {
       next();
     } else {
       res.sendStatus(401);
-      console.log("req.user", req.user.hashedPassword);
-      console.log("req.user.hashedPassword:", req.user.hashedPassword);
-      console.log("req.body.password:", req.body.password);
     }
   } catch (err) {
     console.error(err);
@@ -46,7 +42,7 @@ const verifyPassword = async (req, res, next) => {
 };
 
 const sendToken = (req, res) => {
-  const token = jwt.sign({ sub: req.user.id }, process.env.JWT_SECRET, {
+  const token = jwt.sign({ sub: req.user.id }, jwtSecret, {
     expiresIn: "15min",
   });
 
