@@ -1,3 +1,51 @@
+/* Default styles for larger screens */
+.buttonElectricComponent {
+  border-bottom-right-radius: 1vh;
+  border-bottom-left-radius: 1vh;
+  background-color: aqua;
+}
+
+.formElectricComponent {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 1vh;
+  margin-bottom: 5vh;
+}
+
+.electricComponentCreation {
+  border: 1px solid #000;
+  margin: 3vh;
+}
+
+.calculatorDiv {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  border: 1px solid #000;
+}
+
+.divResult {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-content: center;
+  margin-left: 10vh;
+}
+
+.divResultinside {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  align-content: space-between;
+  gap: 1vh;
+  margin: 2vh;
+}
+
 .eanSearchForm {
   display: flex;
   flex-direction: row;
@@ -12,9 +60,118 @@
   align-items: center;
   gap: 8vh;
 }
+
 .ulDeviceSearchByEan {
   list-style-type: none;
 }
+
 .liDeviceSearchByEan {
   list-style-type: none;
+}
+
+/* Media query for smaller screens (phones and tablets) */
+@media (max-width: 768px) {
+  .buttonElectricComponent {
+    /* Adjust styles as needed for mobile and tablets */
+  }
+
+  .formElectricComponent {
+    /* Change to flex column layout for mobile and tablets */
+    flex-direction: column;
+    gap: 2vh; /* Reduce the gap for better spacing on smaller screens */
+    margin-bottom: 3vh; /* Adjust margin for smaller screens */
+  }
+
+  .electricComponentCreation {
+    /* Adjust styles as needed for mobile and tablets */
+  }
+
+  .calculatorDiv {
+    /* Change to flex column layout for mobile and tablets */
+    flex-direction: column;
+    gap: 5px; /* Adjust the gap for better spacing on smaller screens */
+  }
+
+  .divResult {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .divResultinside {
+    /* Change to flex column layout for mobile and tablets */
+    flex-direction: column;
+    gap: 1vh; /* Adjust the gap for better spacing on smaller screens */
+    margin: 1vh; /* Adjust margin for smaller screens */
+  }
+
+  .searchEanAndbrand {
+    /* Change to flex column layout for mobile and tablets */
+    flex-direction: column;
+    gap: 4vh; /* Reduce the gap for better spacing on smaller screens */
+  }
+}
+.liSearchByBrand {
+  display: flex;
+  flex-direction: column;
+}
+
+@media (min-width: 812px) and (max-width: 1138px) {
+  /* Your CSS styles for screens between 812px and 900px go here */
+  .buttonElectricComponent {
+    /* Adjust styles as needed for mobile and tablets */
+    /* Example: */
+    border-bottom-right-radius: 1vh;
+    border-bottom-left-radius: 1vh;
+    background-color: aqua;
+  }
+
+  .formElectricComponent {
+    /* Change to flex column layout for mobile and tablets */
+    /* Example: */
+    flex-direction: column;
+    gap: 2vh; /* Reduce the gap for better spacing on smaller screens */
+    margin-bottom: 3vh; /* Adjust margin for smaller screens */
+  }
+
+  .electricComponentCreation {
+    /* Adjust styles as needed for mobile and tablets */
+    /* Example: */
+    border: 1px solid #000;
+    margin: 3vh;
+  }
+
+  /* Add similar adjustments for other elements within the media query */
+}
+
+/* Media query for smaller screens (phones and tablets) */
+@media (max-width: 768px) {
+  .buttonElectricComponent,
+  .formElectricComponent,
+  .electricComponentCreation {
+    flex-direction: column;
+    gap: 2vh; /* Adjust gap as needed */
+  }
+}
+
+/* Media query for smaller screens (phones and tablets) */
+@media (max-width: 768px) {
+  .calculatorDiv {
+    flex-direction: column;
+    gap: 5px; /* Adjust the gap for better spacing */
+  }
+
+  .divResult,
+  .divResultinside {
+    flex-direction: column;
+    gap: 1vh; /* Adjust the gap for better spacing */
+    margin: 1vh; /* Adjust margin as needed */
+  }
+}
+/* Media query for smaller screens (phones and tablets) */
+@media (max-width: 768px) {
+  .searchEanAndbrand,
+  .liSearchByBrand {
+    flex-direction: column;
+    gap: 4vh; /* Reduce the gap for better spacing */
+  }
 }

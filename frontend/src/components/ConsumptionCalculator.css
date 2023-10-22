@@ -1,3 +1,4 @@
+/* For desktop screens and larger */
 .calculatorDiv {
   display: flex;
   flex-direction: row;
@@ -14,6 +15,7 @@
   align-content: center;
   margin-left: 10vh;
 }
+
 .divResultinside {
   display: flex;
   flex-direction: column;
@@ -22,4 +24,48 @@
   align-content: space-between;
   gap: 1vh;
   margin: 2vh;
+}
+
+/* Media query for screens with a maximum width of 768px (typical for mobile) */
+@media (max-width: 768px) {
+  .calculatorDiv {
+    /* Change to flex column layout for mobile */
+    flex-direction: column;
+  }
+
+  .divResult {
+    /* Adjust styles as needed for mobile */
+    flex-direction: column;
+    align-items: center;
+    margin: 2vh;
+  }
+
+  .divResultinside {
+    /* Adjust styles as needed for mobile */
+    margin: 2vh;
+  }
+}
+
+/* Media query for screens between 812px and 1138px (iPhone 12 to iPad) */
+@media (min-width: 812px) and (max-width: 1138px) {
+  .calculatorDiv {
+    /* Change to flex column layout for this screen size range */
+    flex-direction: column;
+    align-items: center;
+    margin-top: 1vh;
+    margin-bottom: 1vh;
+    padding-bottom: 1vh;
+  }
+
+  .divResult {
+    /* Adjust styles as needed for this screen size range */
+    flex-direction: column;
+    align-items: center;
+    margin: 2vh;
+  }
+
+  .divResultinside {
+    /* Adjust styles as needed for this screen size range */
+    margin: 2vh;
+  }
 }

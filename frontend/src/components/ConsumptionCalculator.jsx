@@ -4,7 +4,7 @@ import "./ConsumptionCalculator.css";
 function ConsumptionCalculator() {
   const [watt, setWatt] = useState("");
   const [time, setTime] = useState("");
-  const [price, setPrice] = useState("");
+  const [days, setDays] = useState(""); // Add a state for the number of days
   const [consumption, setConsumption] = useState({
     perHour: 0,
     perDay: 0,
@@ -18,7 +18,8 @@ function ConsumptionCalculator() {
     perYear: 0,
   });
   const [currency, setCurrency] = useState("USD"); // Default currency is USD
-  const [prices, setPrices] = useState([]); // Initialize prices as an empty array
+  const [prices, setPrices] = useState([]);
+  const [selectedPrice, setSelectedPrice] = useState(""); // Store the selected price
 
   // Fetch prices from the backend
   async function fetchPrices() {
@@ -30,8 +31,11 @@ function ConsumptionCalculator() {
       if (response.status === 200) {
         const data = await response.json();
         if (data.length > 0) {
-          setPrice(data[0].price); // Set the initial price to the first item in the prices array
-          setPrices(data); // Set the prices array with fetched data
+          setPrices(data);
+          // If no price is selected, set the selected price to the first one
+          if (!selectedPrice && data[0]) {
+            setSelectedPrice(data[0].value);
+          }
         }
       } else {
         console.error("Error fetching prices");
@@ -45,37 +49,30 @@ function ConsumptionCalculator() {
     fetchPrices();
   }, []);
 
-  const handleWattChange = (e) => {
-    setWatt(e.target.value);
-  };
+  const calculateConsumption = () => {
+    if (watt && time && days) {
+      const wattage = parseFloat(watt);
+      const hoursPerDay = parseFloat(time);
+      const numberofDays = parseFloat(days);
+      const kWattage = wattage / 1000;
+      const consumptionPerHour = numberofDays * hoursPerDay * kWattage;
+      const consumptionPerDay = numberofDays * hoursPerDay * kWattage;
+      const consumptionPerMonth = consumptionPerDay * 30; // Assuming 30 days in a month
+      const consumptionPerYear = consumptionPerDay * 365; // Assuming 365 days in a year
 
-  const handleTimeChange = (e) => {
-    setTime(e.target.value);
-  };
+      setConsumption({
+        perHour: consumptionPerHour.toFixed(4), // Display with 4 decimal places
+        perDay: consumptionPerDay.toFixed(2),
+        perMonth: consumptionPerMonth.toFixed(2),
+        perYear: consumptionPerYear.toFixed(2),
+      });
 
-  const handleCurrencyChange = (e) => {
-    setCurrency(e.target.value);
-  };
-
-  useEffect(() => {
-    const calculateConsumption = () => {
-      if (watt && time) {
-        const consumptionPerHour =
-          (parseInt(watt, 10) * parseInt(time, 10)) / 1000;
-        const consumptionPerDay = consumptionPerHour * 24; // Hours in a day
-        const consumptionPerMonth = consumptionPerDay * 30; // Assuming 30 days in a month
-        const consumptionPerYear = consumptionPerDay * 365; // Assuming 365 days in a year
-        const costPerHour = consumptionPerHour * (parseFloat(price) / 1000); // Price is per kWh
-        const costPerDay = consumptionPerDay * (parseFloat(price) / 1000);
-        const costPerMonth = consumptionPerMonth * (parseFloat(price) / 1000);
-        const costPerYear = consumptionPerYear * (parseFloat(price) / 1000);
-
-        setConsumption({
-          perHour: consumptionPerHour.toFixed(2),
-          perDay: consumptionPerDay.toFixed(2),
-          perMonth: consumptionPerMonth.toFixed(2),
-          perYear: consumptionPerYear.toFixed(2),
-        });
+      if (selectedPrice) {
+        const pricePerKWh = parseFloat(selectedPrice);
+        const costPerHour = consumptionPerHour * pricePerKWh;
+        const costPerDay = consumptionPerDay * pricePerKWh;
+        const costPerMonth = consumptionPerMonth * pricePerKWh;
+        const costPerYear = consumptionPerYear * pricePerKWh;
 
         setCost({
           perHour: costPerHour.toFixed(2),
@@ -84,13 +81,6 @@ function ConsumptionCalculator() {
           perYear: costPerYear.toFixed(2),
         });
       } else {
-        setConsumption({
-          perHour: 0,
-          perDay: 0,
-          perMonth: 0,
-          perYear: 0,
-        });
-
         setCost({
           perHour: 0,
           perDay: 0,
@@ -98,18 +88,53 @@ function ConsumptionCalculator() {
           perYear: 0,
         });
       }
-    };
+    } else {
+      setConsumption({
+        perHour: 0,
+        perDay: 0,
+        perMonth: 0,
+        perYear: 0,
+      });
 
+      setCost({
+        perHour: 0,
+        perDay: 0,
+        perMonth: 0,
+        perYear: 0,
+      });
+    }
+  };
+
+  const handleWattChange = (e) => {
+    setWatt(e.target.value);
+  };
+
+  const handleTimeChange = (e) => {
+    setTime(e.target.value);
+  };
+
+  const handleDaysChange = (e) => {
+    setDays(e.target.value);
+  };
+
+  const handleCurrencyChange = (e) => {
+    setCurrency(e.target.value);
+  };
+
+  const handleSubmit = () => {
     calculateConsumption();
-  }, [watt, time, price]);
+  };
+
+  useEffect(() => {
+    calculateConsumption();
+  }, [watt, time, selectedPrice, days]);
 
   return (
     <div>
-      <h2>Consumption Calculator</h2>
       <div className="calculatorDiv">
+        <h2> Calculator</h2>
         <div>
           <label>
-            Watt:
             <input
               type="number"
               value={watt}
@@ -120,7 +145,6 @@ function ConsumptionCalculator() {
         </div>
         <div>
           <label>
-            Number of Hours:
             <input
               type="number"
               value={time}
@@ -129,20 +153,29 @@ function ConsumptionCalculator() {
             />
           </label>
         </div>
+        <div>
+          <label>
+            <input
+              type="number"
+              value={days}
+              onChange={handleDaysChange}
+              placeholder="Number of Days"
+            />
+          </label>
+        </div>
         <div className="calculatorDiv">
           <div>
             <label>
               Price (per kWh):
-              <select value={price} onChange={(e) => setPrice(e.target.value)}>
-                {/* Sort prices in ascending order before mapping */}
-                {prices
-                  .slice() // Create a copy of the prices array to avoid mutating the original
-                  .sort((a, b) => parseFloat(a.price) - parseFloat(b.price))
-                  .map((priceItem) => (
-                    <option key={priceItem.id} value={priceItem.price}>
-                      {priceItem.price}
-                    </option>
-                  ))}
+              <select
+                value={selectedPrice}
+                onChange={(e) => setSelectedPrice(e.target.value)}
+              >
+                {prices.map((priceItem) => (
+                  <option key={priceItem.id} value={priceItem.value}>
+                    {priceItem.value}
+                  </option>
+                ))}
               </select>
             </label>
           </div>
@@ -160,7 +193,7 @@ function ConsumptionCalculator() {
           </div>
           <div className="divResultinside">
             <h3>Consumption:</h3>
-            <p>Per Hour: {consumption.perHour} kWh</p>
+            <p>Per Hour: {Number(consumption.perHour).toFixed(4)} kWh</p>
             <p>Per Day: {consumption.perDay} kWh</p>
             <p>Per Month: {consumption.perMonth} kWh</p>
             <p>Per Year: {consumption.perYear} kWh</p>

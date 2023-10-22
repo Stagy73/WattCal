@@ -58,7 +58,7 @@ function DeviceSearch() {
         </form>
 
         {error && <p>{error}</p>}
-        <h3>Matching Devices:</h3>
+
         <ul className="ulDeviceSearchByEan">
           {devices.length > 0 ? (
             devices.map((device) => (
@@ -67,7 +67,7 @@ function DeviceSearch() {
               </li>
             ))
           ) : (
-            <li className="liDeviceSearchByEan">No matching devices found.</li>
+            <li className="liDeviceSearchByEan" />
           )}
         </ul>
       </div>

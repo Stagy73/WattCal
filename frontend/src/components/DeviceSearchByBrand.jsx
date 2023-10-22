@@ -50,21 +50,17 @@ function DeviceSearchByBrand() {
         </button>
       </form>
       {error && <p>{error}</p>}
-      <h3>Matching Devices:</h3>
+
       <ul className="ulDeviceSearchByBrand">
-        {devices.length > 0 ? (
-          devices.map((device, index) => (
-            <li className="liSearchByBrand" key={index}>
-              <p className="resultSearchBrand">Name:</p>
-              {device.title} - <p className="resultSearchBrand">Brand:</p>
-              {device.brand} -<p className="resultSearchBrand">Category:</p>{" "}
-              {device.category_name} -<p className="resultSearchBrand">watt:</p>
-              {device.watt}
-            </li>
-          ))
-        ) : (
-          <li>No matching devices found.</li>
-        )}
+        {devices.map((device, index) => (
+          <li className="liSearchByBrand" key={index}>
+            <p className="resultSearchBrand">Brand: {device.title}</p>
+            <p className="resultSearchBrand">
+              Category: {device.category_name}
+            </p>
+            <p className="resultSearchBrand">Watt: {device.watt}</p>
+          </li>
+        ))}
       </ul>
     </div>
   );

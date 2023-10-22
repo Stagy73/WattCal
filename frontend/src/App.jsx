@@ -15,11 +15,11 @@ import DeviceSearch from "./components/DeviceSearch";
 function Home() {
   // Render all three components here
   return (
-    <>
+    <div className="appFlex">
       <Suppliers />
       <Device />
       <DeviceSearch />
-    </>
+    </div>
   );
 }
 

@@ -117,12 +117,10 @@ function Suppliers() {
                 title="Enter a valid date in the format yyyy-mm-dd"
               />
             </label>
-            <label>
-              <button className="buttonSupplier" type="submit">
-                Submit
-              </button>{" "}
-              supplier will be added to database
-            </label>
+
+            <button className="buttonSupplier" type="submit">
+              Submit
+            </button>
           </form>
         </div>
       </div>

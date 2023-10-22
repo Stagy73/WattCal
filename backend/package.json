@@ -13,7 +13,9 @@
     "dotenv": "^16.0.3",
     "express": "^4.18.2",
     "jsonwebtoken": "^9.0.2",
-    "mysql2": "^3.0.1"
+    "mysql-adapter": "^0.0.7",
+    "mysql2": "^3.0.1",
+    "next-auth": "^4.23.2"
   },
   "devDependencies": {
     "eslint": "^8.32.0",

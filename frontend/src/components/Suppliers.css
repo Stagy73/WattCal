@@ -1,3 +1,12 @@
+/* Regular styles for larger screens */
+.form-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+}
+
 .formSuppliers {
   display: flex;
   flex-direction: row;
@@ -13,4 +22,13 @@
 .supplierCreation {
   border: 1px solid #000;
   margin: 3vh;
+}
+
+/* Media query for phone-sized screens */
+@media (max-width: 767px) {
+  .form-container,
+  .formSuppliers {
+    flex-direction: column;
+    margin-bottom: 1vh;
+  }
 }

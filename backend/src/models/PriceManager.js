@@ -6,14 +6,14 @@ class PriceManager extends AbstractManager {
   }
 
   insert(price) {
-    return this.database.query(`insert into ${this.table} (price) values (?)`, [
-      price.price,
+    return this.database.query(`insert into ${this.table} (price) value (?)`, [
+      price.value,
     ]);
   }
 
   update(price) {
     return this.database.query(
-      `update ${this.table} set code = ? where id = ?`,
+      `update ${this.table} set price = ? where id = ?`,
       [price.price, price.id]
     );
   }

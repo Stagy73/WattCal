@@ -7,6 +7,10 @@ body {
   -moz-osx-font-smoothing: grayscale;
   background-color: aqua;
 }
+body {
+  margin: 0; /* Remove default margin */
+  padding: 0; /* Remove default padding */
+}
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
@@ -54,4 +58,16 @@ code {
 
 button {
   font-size: calc(10px + 2vmin);
+}
+
+.appFlex {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+#root {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }

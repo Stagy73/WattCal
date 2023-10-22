@@ -1,6 +1,7 @@
 import { useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import PropTypes from "prop-types";
+import "./Login.css";
 
 function LoginForm({ setUser }) {
   const emailRef = useRef();
@@ -27,10 +28,11 @@ function LoginForm({ setUser }) {
       .then((response) => response.json())
       .then((data) => {
         console.info("do you see cookie here ?", document.cookie);
+        console.log("this are the data", data);
 
         setUser(data.user);
-        if (data.user.verified) {
-          console.log(data.user);
+        if (data.user.verified !== undefined && data.user.verified) {
+          console.info("this is verfied user", data.user.verified);
           // Navigate to the "myspace" page
           navigate("/Myspace");
         }

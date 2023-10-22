@@ -1,8 +1,10 @@
+/* For desktop screens and larger */
 .buttonElectricComponent {
   border-bottom-right-radius: 1vh;
   border-bottom-left-radius: 1vh;
   background-color: aqua;
 }
+
 .formElectricComponent {
   display: flex;
   flex-direction: row;
@@ -11,7 +13,40 @@
   gap: 1vh;
   margin-bottom: 5vh;
 }
+
 .electricComponentCreation {
   border: 1px solid #000;
   margin: 3vh;
+}
+.form-container {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Media query for screens with a maximum width of 768px (typical for mobile) */
+@media (max-width: 768px) {
+  .formElectricComponent {
+    /* Change to flex column layout for mobile */
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .electricComponentCreation {
+    /* Adjust margin for better spacing on mobile */
+    margin: 2vh;
+  }
+}
+
+/* Media query for screens between 812px and 900px (iPhone 12 to iPad) */
+@media (min-width: 812px) and (max-width: 1138px) {
+  .formElectricComponent {
+    /* Change to flex column layout for this screen size range */
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .electricComponentCreation {
+    /* Adjust margin for better spacing in this screen size range */
+    margin: 2vh;
+  }
 }

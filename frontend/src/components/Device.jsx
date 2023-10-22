@@ -83,7 +83,7 @@ function Device() {
   async function fetchPrices() {
     try {
       const response = await fetch(
-        `${import.meta.env.VITE_BACKEND_URL ?? "http://127.0.0.1:6001"}/prices`
+        `${import.meta.env.VITE_BACKEND_URL ?? "http:127.0.0.1:6001"}/prices`
       );
 
       if (response.status === 200) {
@@ -273,8 +273,8 @@ function Device() {
                 {prices
                   .sort((a, b) => a.price - b.price) // Sort prices in ascending order
                   .map((price) => (
-                    <option key={price.id} value={price.price}>
-                      {price.price}
+                    <option key={price.id} value={price.value}>
+                      {price.value}
                     </option>
                   ))}
               </select>
@@ -289,12 +289,10 @@ function Device() {
                 required
               />
             </label>
-            <label>
-              <button className="buttonElectricComponent" type="submit">
-                Submit
-              </button>{" "}
-              Electric component will be added to the database
-            </label>
+
+            <button className="buttonElectricComponent" type="submit">
+              Submit
+            </button>
           </form>
         </div>
         <ConsumptionCalculator />
