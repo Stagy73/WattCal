@@ -30,7 +30,7 @@ router.delete("/items/:id", itemControllers.destroy);
 router.get("/devices", deviceController.browse);
 router.get("/devices/:id", deviceController.read);
 router.get("/devices/:ean", deviceController.readean);
-router.get("/devices/brand/:brand", deviceController.searchByBrand);
+router.get("/devices/:brand", deviceController.searchByBrand);
 
 router.put("/devices/:id", deviceController.edit);
 router.post("/devices", deviceController.add);

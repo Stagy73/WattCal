@@ -11,7 +11,9 @@ function Device() {
   const categoryRef = useRef();
   const eanRef = useRef();
   const supplierRef = useRef();
-  const priceRef = useRef(); // Ref for the price dropdown
+  const priceRef = useRef();
+  const descriptionRef = useRef(); // Ref for the description field
+  const pictureUrlRef = useRef(); // Ref for the picture URL field
 
   const formRef = useRef();
 
@@ -19,7 +21,7 @@ function Device() {
   const [categories, setCategories] = useState([]);
   const [suppliers, setSuppliers] = useState([]);
   const [devices, setDevices] = useState([]);
-  const [prices, setPrices] = useState([]); // State for storing prices
+  const [prices, setPrices] = useState([]);
 
   useEffect(() => {
     async function fetchCategories() {
@@ -79,7 +81,6 @@ function Device() {
     }
   }
 
-  // Fetch prices from the device route
   async function fetchPrices() {
     try {
       const response = await fetch(
@@ -111,7 +112,9 @@ function Device() {
       categoryRef.current.value === "" ||
       eanRef.current.value === "" ||
       supplierRef.current.value === "" ||
-      priceRef.current.value === ""
+      priceRef.current.value === "" ||
+      descriptionRef.current.value === "" || // Added description validation
+      pictureUrlRef.current.value === "" // Added picture_url validation
     ) {
       return;
     }
@@ -123,6 +126,8 @@ function Device() {
     const ean = eanRef.current.value;
     const supplier = supplierRef.current.value;
     const price = priceRef.current.value;
+    const description = descriptionRef.current.value; // Get description value
+    const pictureUrl = pictureUrlRef.current.value; // Get picture_url value
 
     formRef.current.reset();
     titleRef.current.value = "";
@@ -132,6 +137,8 @@ function Device() {
     eanRef.current.value = "";
     supplierRef.current.value = "";
     priceRef.current.value = "";
+    descriptionRef.current.value = ""; // Clear description field
+    pictureUrlRef.current.value = ""; // Clear picture_url field
 
     try {
       const response = await fetch(
@@ -151,6 +158,8 @@ function Device() {
             ean,
             supplier,
             price,
+            description, // Include description in the JSON
+            picture_url: pictureUrl, // Include picture_url in the JSON
           }),
         }
       );
@@ -271,7 +280,7 @@ function Device() {
                   Select a Price *
                 </option>
                 {prices
-                  .sort((a, b) => a.price - b.price) // Sort prices in ascending order
+                  .sort((a, b) => a.price - b.price)
                   .map((price) => (
                     <option key={price.id} value={price.value}>
                       {price.value}
@@ -286,6 +295,26 @@ function Device() {
                 name="ean"
                 ref={eanRef}
                 placeholder="EAN *"
+                required
+              />
+            </label>
+            <label>
+              <input
+                className="form-container-info"
+                type="text"
+                name="description"
+                ref={descriptionRef}
+                placeholder="Description *"
+                required
+              />
+            </label>
+            <label>
+              <input
+                className="form-container-info"
+                type="text"
+                name="picture_url"
+                ref={pictureUrlRef}
+                placeholder="Picture URL *"
                 required
               />
             </label>

@@ -8,7 +8,7 @@ class DeviceManager extends AbstractManager {
   async insert(device) {
     try {
       const result = await this.database.query(
-        `INSERT INTO ${this.table} (title, brand, watt, ean, category_name, supplier, price, price_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?)`,
+        `INSERT INTO ${this.table} (title, brand, watt, ean, category_name, supplier, price, price_id, description ,picture_url) VALUES (?, ?, ?, ?, ?, ?, ?, ?,?,?)`,
         [
           device.title,
           device.brand,
@@ -18,6 +18,8 @@ class DeviceManager extends AbstractManager {
           device.supplier,
           device.price,
           device.price_id,
+          device.description,
+          device.picture_url,
         ]
       );
 
