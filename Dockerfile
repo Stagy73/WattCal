@@ -13,11 +13,9 @@ ENV DB_PASSWORD=$DB_PASSWORD
 ARG DB_NAME
 ENV DB_NAME=$DB_NAME
 
-# Copy the backend source code to /app
-COPY ./backend ./
-
-# Clone your GitHub repository using the HTTPS URL (Assuming Git is available)
-RUN apt-get update && apt-get install -y git && git clone https://github.com/Stagy73/WattCal.git /app/repo
+# Copy the local backend source code and package.json to /app
+COPY ./backend /app
+COPY ./backend/package.json /app
 
 # Install backend dependencies
 RUN npm install
@@ -27,23 +25,21 @@ RUN npm install
 # RUN npm run build
 
 # Stage 2: Build the React (frontend) application
-FROM node:16.14 as builder-frontend
+FROM builder-backend as builder-frontend
 
-WORKDIR /app
+# Set the working directory for frontend build
+WORKDIR /app/frontend
 
 # Copy package.json and package-lock.json to install frontend dependencies
 COPY package*.json ./
 
-# Install Vite and frontend dependencies
-RUN npm install -g create-vite
-RUN npm install -g vite
+# Install frontend dependencies (no need to reinstall Vite)
 RUN npm install
 
-# Copy the entire frontend project, excluding node_modules
-COPY ./frontend ./frontend
+# Copy the local frontend project, excluding node_modules
+COPY ./frontend /app/frontend
 
 # Build the frontend
-WORKDIR /app/frontend
 RUN npm run build
 
 # Stage 3: Create the final production image
@@ -59,4 +55,4 @@ COPY --from=builder-frontend /app /app
 # EXPOSE 3000
 
 # Start your application, change "npm run dev" to the command to start your backend
-CMD ["npm", "run", "start"]
+CMD ["npm", "run", "dev"]
