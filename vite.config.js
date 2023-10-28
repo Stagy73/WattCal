@@ -3,8 +3,8 @@ import { defineConfig } from "vite";
 export default defineConfig({
   build: {
     rollupOptions: {
-      input: "frontend/src/main.jsx", // Update to the correct entry point
+      input: "frontend/src/main.jsx",
+      external: ["react", "react-dom"], // Add "react" and "react-dom" as external dependencies
     },
   },
-  // Other configuration options...
 });
