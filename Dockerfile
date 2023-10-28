@@ -59,4 +59,4 @@ COPY --from=builder-frontend /app /app
 # EXPOSE 3000
 
 # Start your application, change "npm run dev" to the command to start your backend
-CMD ["npm", "run", "dev"]
+CMD ["npm", "run", "start"]
