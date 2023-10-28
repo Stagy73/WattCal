@@ -32,8 +32,11 @@
     "vite": "^4.5.0"
   },
   "dependencies": {
+    "@vitejs/plugin-react": "^4.1.0",
     "axios": "^1.5.1",
     "next-auth": "^4.23.2",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
     "react-toastify": "^9.1.3"
   }
 }

@@ -1,10 +1,12 @@
 import { defineConfig } from "vite";
+import react from "@vitejs/plugin-react";
 
+// https://vitejs.dev/config/
 export default defineConfig({
+  plugins: [react()],
   build: {
     rollupOptions: {
-      input: "frontend/src/main.jsx",
-      external: ["react", "react-dom"], // Add "react" and "react-dom" as external dependencies
+      external: ["react", "react-dom"],
     },
   },
 });
