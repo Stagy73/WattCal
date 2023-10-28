@@ -8,7 +8,7 @@ ARG VITE_BACKEND_URL=${VITE_BACKEND_URL}
 ENV VITE_BACKEND_URL=${VITE_BACKEND_URL}
 COPY ./frontend /usr/src/app
 RUN npm install
-RUN npm run build
+RUN npm run start
 
 # production environment
 FROM nginx:1.15
