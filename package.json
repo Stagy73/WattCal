@@ -34,6 +34,7 @@
   "dependencies": {
     "@vitejs/plugin-react": "^4.1.0",
     "axios": "^1.5.1",
+    "dompurify": "^3.0.6",
     "next-auth": "^4.23.2",
     "prop-types": "^15.8.1",
     "react": "^18.2.0",
