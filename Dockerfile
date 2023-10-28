@@ -44,7 +44,7 @@ COPY ./frontend ./frontend
 
 # Build the frontend
 WORKDIR /app/frontend
-RUN npm run start
+RUN npm run build
 
 # Stage 3: Create the final production image
 FROM node:16.14
@@ -58,5 +58,5 @@ COPY --from=builder-frontend /app /app
 # Expose the port if your backend is running on a specific port
 # EXPOSE 3000
 
-# Define the command to start your application
-CMD [ "npm", "start" ]
+# Start your application, change "npm run dev" to the command to start your backend
+CMD ["npm", "run", "dev"]
