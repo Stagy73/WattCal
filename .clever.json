@@ -1,0 +1,11 @@
+{
+  "apps": [
+    {
+      "app_id": "app_5276ed87-39ed-44db-af01-7d393427e763",
+      "org_id": "orga_800f6dff-5666-4c0d-a786-42ea69aa8371",
+      "deploy_url": "https://push-n3-par-clevercloud-customers.services.clever-cloud.com/app_5276ed87-39ed-44db-af01-7d393427e763.git",
+      "name": "wattcal",
+      "alias": "wattcal"
+    }
+  ]
+}

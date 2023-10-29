@@ -5,13 +5,13 @@ WORKDIR /app
 
 # Set environment variables
 ARG DB_HOST
-ENV DB_HOST=$DB_HOST
+ENV DB_HOST=host.docker.internal
 ARG DB_USER
-ENV DB_USER=$DB_USER
+ENV DB_USER=nils
 ARG DB_PASSWORD
-ENV DB_PASSWORD=$DB_PASSWORD
+ENV DB_PASSWORD=nm
 ARG DB_NAME
-ENV DB_NAME=$DB_NAME
+ENV DB_NAME=wattcal
 
 # Copy the local backend source code and package.json to /app
 COPY ./backend /app
@@ -52,7 +52,7 @@ COPY --from=builder-backend /app /app
 COPY --from=builder-frontend /app /app
 
 # Expose the port if your backend is running on a specific port
-# EXPOSE 3000
+EXPOSE 3000
 
 # Start your application, change "npm run dev" to the command to start your backend
 CMD ["npm", "run", "dev"]
