@@ -1,0 +1,12 @@
+# Use the official MySQL image as the base
+FROM mysql:latest
+
+# Set the root password for MySQL
+ENV MYSQL_ROOT_PASSWORD=your_root_password
+
+# Set the existing user 'nils' password (change 'nm' to the actual password)
+ENV MYSQL_USER=nils
+ENV MYSQL_PASSWORD=nm
+
+# Specify the name of the existing database
+ENV MYSQL_DATABASE=wattcal

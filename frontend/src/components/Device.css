@@ -7,16 +7,18 @@
 
 .formElectricComponent {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   gap: 1vh;
   margin-bottom: 5vh;
+  width: 50vh;
 }
 
 .electricComponentCreation {
   border: 1px solid #000;
   margin: 3vh;
+  width: 140vh;
 }
 .form-container {
   display: flex;

@@ -24,7 +24,7 @@ class UserManager extends AbstractManager {
       [
         user.pseudo,
         user.email,
-        user.password,
+        user.hashedpassword,
         user.country,
         user.mydevice,
         user.result,

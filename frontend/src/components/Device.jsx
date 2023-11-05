@@ -199,133 +199,132 @@ function Device() {
       <h2>Add your Device</h2>
       <div className="form-container">
         <div className="message-error">{error && <p>{error}</p>}</div>
-        <div>
-          <form
-            className="formElectricComponent"
-            ref={formRef}
-            onSubmit={handleSubmit}
-          >
-            <label>
-              <input
-                className="form-container-info"
-                type="text"
-                name="title"
-                ref={titleRef}
-                placeholder="Title *"
-                required
-              />
-            </label>
-            <label>
-              <input
-                className="form-container-info"
-                type="text"
-                name="brand"
-                ref={brandRef}
-                placeholder="Brand *"
-                required
-              />
-            </label>
-            <label>
-              <input
-                className="form-container-info"
-                type="number"
-                name="watt"
-                ref={wattRef}
-                placeholder="Watt *"
-                required
-              />
-            </label>
-            <label>
-              <select
-                className="form-container-info"
-                name="category"
-                ref={categoryRef}
-                required
-              >
-                <option value="" disabled>
-                  Select a Category *
-                </option>
-                {categories.map((category) => (
-                  <option key={category.id} value={category.title}>
-                    {category.title}
-                  </option>
-                ))}
-              </select>
-            </label>
-            <label>
-              <select
-                className="form-container-info"
-                name="supplier"
-                ref={supplierRef}
-                required
-              >
-                <option value="" disabled>
-                  Select a Supplier *
-                </option>
-                {suppliers.map((supplier) => (
-                  <option key={supplier.id} value={supplier.title}>
-                    {supplier.title}
-                  </option>
-                ))}
-              </select>
-            </label>
-            <label>
-              <select
-                className="form-container-info"
-                name="price"
-                ref={priceRef}
-                required
-              >
-                <option value="" disabled>
-                  Select a Price *
-                </option>
-                {prices
-                  .sort((a, b) => a.price - b.price)
-                  .map((price) => (
-                    <option key={price.id} value={price.value}>
-                      {price.value}
-                    </option>
-                  ))}
-              </select>
-            </label>
-            <label>
-              <input
-                className="form-container-info"
-                type="number"
-                name="ean"
-                ref={eanRef}
-                placeholder="EAN *"
-                required
-              />
-            </label>
-            <label>
-              <input
-                className="form-container-info"
-                type="text"
-                name="description"
-                ref={descriptionRef}
-                placeholder="Description *"
-                required
-              />
-            </label>
-            <label>
-              <input
-                className="form-container-info"
-                type="text"
-                name="picture_url"
-                ref={pictureUrlRef}
-                placeholder="Picture URL *"
-                required
-              />
-            </label>
 
-            <button className="buttonElectricComponent" type="submit">
-              Submit
-            </button>
-          </form>
-        </div>
-        <ConsumptionCalculator />
+        <form
+          className="formElectricComponent"
+          ref={formRef}
+          onSubmit={handleSubmit}
+        >
+          <label>
+            <input
+              className="form-container-info"
+              type="text"
+              name="title"
+              ref={titleRef}
+              placeholder="Title *"
+              required
+            />
+          </label>
+          <label>
+            <input
+              className="form-container-info"
+              type="text"
+              name="brand"
+              ref={brandRef}
+              placeholder="Brand *"
+              required
+            />
+          </label>
+          <label>
+            <input
+              className="form-container-info"
+              type="number"
+              name="watt"
+              ref={wattRef}
+              placeholder="Watt *"
+              required
+            />
+          </label>
+          <label>
+            <select
+              className="form-container-info"
+              name="category"
+              ref={categoryRef}
+              required
+            >
+              <option value="" disabled>
+                Select a Category *
+              </option>
+              {categories.map((category) => (
+                <option key={category.id} value={category.title}>
+                  {category.title}
+                </option>
+              ))}
+            </select>
+          </label>
+          <label>
+            <select
+              className="form-container-info"
+              name="supplier"
+              ref={supplierRef}
+              required
+            >
+              <option value="" disabled>
+                Select a Supplier *
+              </option>
+              {suppliers.map((supplier) => (
+                <option key={supplier.id} value={supplier.title}>
+                  {supplier.title}
+                </option>
+              ))}
+            </select>
+          </label>
+          <label>
+            <select
+              className="form-container-info"
+              name="price"
+              ref={priceRef}
+              required
+            >
+              <option value="" disabled>
+                Select a Price *
+              </option>
+              {prices
+                .sort((a, b) => a.price - b.price)
+                .map((price) => (
+                  <option key={price.id} value={price.value}>
+                    {price.value}
+                  </option>
+                ))}
+            </select>
+          </label>
+          <label>
+            <input
+              className="form-container-info"
+              type="number"
+              name="ean"
+              ref={eanRef}
+              placeholder="EAN *"
+              required
+            />
+          </label>
+          <label>
+            <input
+              className="form-container-info"
+              type="text"
+              name="description"
+              ref={descriptionRef}
+              placeholder="Description *"
+              required
+            />
+          </label>
+          <label>
+            <input
+              className="form-container-info"
+              type="text"
+              name="picture_url"
+              ref={pictureUrlRef}
+              placeholder="Picture URL *"
+              required
+            />
+          </label>
+
+          <button className="buttonElectricComponent" type="submit">
+            Submit
+          </button>
+        </form>
       </div>
+      <ConsumptionCalculator />
     </div>
   );
 }

@@ -27,9 +27,6 @@ function LoginForm({ setUser }) {
     )
       .then((response) => response.json())
       .then((data) => {
-        console.info("do you see cookie here ?", document.cookie);
-        console.log("this are the data", data);
-
         setUser(data.user);
         if (data.user.verified !== undefined && data.user.verified) {
           console.info("this is verfied user", data.user.verified);
@@ -40,12 +37,12 @@ function LoginForm({ setUser }) {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <div>
+    <form className="formLogin" onSubmit={handleSubmit}>
+      <div className="divLogin">
         <label htmlFor="email">email</label>
         <input type="text" id="email" ref={emailRef} />
       </div>
-      <div>
+      <div className="divLogin">
         <label htmlFor="password">password</label>
         <input type="password" id="password" ref={passwordRef} />
       </div>

@@ -3,7 +3,7 @@ FROM node:16.14 as builder-backend
 
 WORKDIR /app
 
-# Set environment variables
+# Set environment variables for the backend
 ARG DB_HOST
 ENV DB_HOST=host.docker.internal
 ARG DB_USER
@@ -25,13 +25,13 @@ RUN npm install
 # RUN npm run build
 
 # Stage 2: Build the React (frontend) application
-FROM builder-backend as builder-frontend
+FROM node:16.14 as builder-frontend
 
 # Set the working directory for frontend build
 WORKDIR /app/frontend
 
 # Copy package.json and package-lock.json to install frontend dependencies
-COPY package*.json ./
+COPY ./frontend/package*.json ./
 
 # Install frontend dependencies (no need to reinstall Vite)
 RUN npm install
