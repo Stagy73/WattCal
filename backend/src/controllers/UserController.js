@@ -29,7 +29,7 @@ const read = (req, res) => {
 };
 
 const getUserByUsernameWithPasswordAndPassToNext = (req, res, next) => {
-  const email = req.body.email;
+  const { email } = req.body;
   models.user
     .findByUsernameWithPassword(email)
     .then(([rows]) => {

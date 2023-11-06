@@ -9,7 +9,7 @@
 .buttonSearchByBrand {
   border-bottom-right-radius: 1vh;
   border-bottom-left-radius: 1vh;
-  background-color: aqua;
+  background-color: rgb(21, 220, 21);
   margin-left: 1vh;
 }
 
@@ -56,4 +56,23 @@
 .cardWatt {
   font-size: 1rem;
   color: #777;
+}
+
+/* Add this CSS to style all buttons in your application */
+
+/* Style for all buttons */
+button {
+  background-color: #16b71e; /* Change the background color as needed */
+  color: #fff; /* Text color */
+  padding: 10px 20px;
+  font-size: 16px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin: 5px; /* Add some margin between buttons */
+}
+
+button:hover {
+  background-color: #0056b3; /* Change the background color when hovering */
 }

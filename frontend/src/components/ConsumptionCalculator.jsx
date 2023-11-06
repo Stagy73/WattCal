@@ -61,8 +61,8 @@ function ConsumptionCalculator() {
       const consumptionPerYear = consumptionPerDay * 365; // Assuming 365 days in a year
 
       setConsumption({
-        perHour: consumptionPerHour.toFixed(4), // Display with 4 decimal places
-        perDay: consumptionPerDay.toFixed(2),
+        perHour: consumptionPerHour.toFixed(2), // Display with 2 decimal places
+        perDay: consumptionPerDay.toFixed(2), // Display with 2 decimal places
         perMonth: consumptionPerMonth.toFixed(2),
         perYear: consumptionPerYear.toFixed(2),
       });
@@ -119,10 +119,6 @@ function ConsumptionCalculator() {
 
   const handleCurrencyChange = (e) => {
     setCurrency(e.target.value);
-  };
-
-  const handleSubmit = () => {
-    calculateConsumption();
   };
 
   useEffect(() => {
@@ -193,7 +189,7 @@ function ConsumptionCalculator() {
           </div>
           <div className="divResultinside">
             <h3>Consumption:</h3>
-            <p>Per Hour: {Number(consumption.perHour).toFixed(4)} kWh</p>
+            <p>Per Hour: {consumption.perHour} kWh</p>
             <p>Per Day: {consumption.perDay} kWh</p>
             <p>Per Month: {consumption.perMonth} kWh</p>
             <p>Per Year: {consumption.perYear} kWh</p>

@@ -29,7 +29,8 @@ function LoginForm({ setUser }) {
       .then((data) => {
         setUser(data.user);
         if (data.user.verified !== undefined && data.user.verified) {
-          console.info("this is verfied user", data.user.verified);
+          console.log(data.user);
+
           // Navigate to the "myspace" page
           navigate("/Myspace");
         }

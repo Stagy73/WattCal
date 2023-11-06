@@ -20,7 +20,6 @@ function Device() {
   const [error, setError] = useState("");
   const [categories, setCategories] = useState([]);
   const [suppliers, setSuppliers] = useState([]);
-  const [devices, setDevices] = useState([]);
   const [prices, setPrices] = useState([]);
 
   useEffect(() => {
@@ -64,23 +63,6 @@ function Device() {
     fetchSuppliers();
   }, []);
 
-  async function fetchDevices() {
-    try {
-      const response = await fetch(
-        `${import.meta.env.VITE_BACKEND_URL ?? "http://127.0.0.1:6001"}/devices`
-      );
-
-      if (response.status === 200) {
-        const data = await response.json();
-        setDevices(data);
-      } else {
-        console.error("Error fetching devices");
-      }
-    } catch (error) {
-      console.error(error);
-    }
-  }
-
   async function fetchPrices() {
     try {
       const response = await fetch(
@@ -93,8 +75,8 @@ function Device() {
       } else {
         console.error("Error fetching prices");
       }
-    } catch (error) {
-      console.error(error);
+    } catch (fetchPricesError) {
+      console.error(fetchPricesError);
     }
   }
 
@@ -113,8 +95,8 @@ function Device() {
       eanRef.current.value === "" ||
       supplierRef.current.value === "" ||
       priceRef.current.value === "" ||
-      descriptionRef.current.value === "" || // Added description validation
-      pictureUrlRef.current.value === "" // Added picture_url validation
+      descriptionRef.current.value === "" ||
+      pictureUrlRef.current.value === ""
     ) {
       return;
     }
@@ -126,8 +108,8 @@ function Device() {
     const ean = eanRef.current.value;
     const supplier = supplierRef.current.value;
     const price = priceRef.current.value;
-    const description = descriptionRef.current.value; // Get description value
-    const pictureUrl = pictureUrlRef.current.value; // Get picture_url value
+    const description = descriptionRef.current.value;
+    const pictureUrl = pictureUrlRef.current.value;
 
     formRef.current.reset();
     titleRef.current.value = "";
@@ -137,8 +119,8 @@ function Device() {
     eanRef.current.value = "";
     supplierRef.current.value = "";
     priceRef.current.value = "";
-    descriptionRef.current.value = ""; // Clear description field
-    pictureUrlRef.current.value = ""; // Clear picture_url field
+    descriptionRef.current.value = "";
+    pictureUrlRef.current.value = "";
 
     try {
       const response = await fetch(
@@ -158,8 +140,8 @@ function Device() {
             ean,
             supplier,
             price,
-            description, // Include description in the JSON
-            picture_url: pictureUrl, // Include picture_url in the JSON
+            description,
+            picture_url: pictureUrl,
           }),
         }
       );
@@ -169,9 +151,6 @@ function Device() {
           position: "top-right",
         });
         setError("");
-
-        // Fetch the newly added device and add it to the devices state
-        fetchDevices();
       } else {
         const data = await response.json();
         if (data.message) {
@@ -184,8 +163,8 @@ function Device() {
           setError("");
         }
       }
-    } catch (error) {
-      console.error(error);
+    } catch (err) {
+      console.error(err);
 
       toast.error("Error on electric component creation.", {
         position: "top-right",
