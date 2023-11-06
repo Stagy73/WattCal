@@ -17,7 +17,7 @@ function DeviceSearchByBrand() {
       const response = await fetch(
         `${
           import.meta.env.VITE_BACKEND_URL ?? "http://127.0.0.1:6001"
-        }/devices/:brand`
+        }/devices/${selectedBrand}`
       );
 
       if (response.status === 200) {
@@ -76,8 +76,8 @@ function DeviceSearchByBrand() {
           >
             <option value="">Select a brand</option>
             {brands.map((brand) => (
-              <option key={brand} value={brand}>
-                {brand}
+              <option key={brand.id} value={brand.id}>
+                {brand.brand}
               </option>
             ))}
           </select>
