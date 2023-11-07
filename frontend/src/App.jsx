@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { ToastContainer } from "react-toastify";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { useState } from "react";
