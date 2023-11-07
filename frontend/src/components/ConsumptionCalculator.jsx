@@ -130,7 +130,7 @@ function ConsumptionCalculator() {
       <div className="calculatorDiv">
         <h2> Calculator</h2>
         <div>
-          <label>
+          <label htmlFor="watt">
             <input
               type="number"
               value={watt}
@@ -140,7 +140,7 @@ function ConsumptionCalculator() {
           </label>
         </div>
         <div>
-          <label>
+          <label htmlFor="time">
             <input
               type="number"
               value={time}
@@ -150,7 +150,7 @@ function ConsumptionCalculator() {
           </label>
         </div>
         <div>
-          <label>
+          <label htmlFor="days">
             <input
               type="number"
               value={days}
